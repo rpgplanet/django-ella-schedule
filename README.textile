@@ -1,4 +1,10 @@
-h1. Django-schedule
+h1. django-ella-schedule
+
+Tweak of django-schedule, thanks, respect and kudos to all it's original authors (see github.com/thauber/django-schedule).
+
+This is modified to utilize Ella CMS's Publishable model.
+
+h2. Django-schedule
 
 A calendaring/scheduling application, featuring:
 
