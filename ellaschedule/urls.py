@@ -1,9 +1,9 @@
 from django.conf.urls.defaults import *
 from django.views.generic.list_detail import object_list
-from schedule.models import Calendar
-from schedule.feeds import UpcomingEventsFeed
-from schedule.feeds import CalendarICalendar
-from schedule.periods import Year, Month, Week, Day
+from ellaschedule.models import Calendar
+from ellaschedule.feeds import UpcomingEventsFeed
+from ellaschedule.feeds import CalendarICalendar
+from ellaschedule.periods import Year, Month, Week, Day
 
 info_dict = {
     'queryset': Calendar.objects.all(),

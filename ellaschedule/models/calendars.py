@@ -9,7 +9,7 @@ from django.utils.translation import ugettext, ugettext_lazy as _
 from django.template.defaultfilters import slugify
 import datetime
 from dateutil import rrule
-from schedule.utils import EventListManager
+from ellaschedule.utils import EventListManager
 
 class CalendarManager(models.Manager):
     """

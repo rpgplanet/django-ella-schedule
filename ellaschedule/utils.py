@@ -3,7 +3,7 @@ import heapq
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseRedirect
 from django.conf import settings
-from schedule.conf.settings import CHECK_PERMISSION_FUNC
+from ellaschedule.conf.settings import CHECK_PERMISSION_FUNC
 
 class EventListManager(object):
     """
@@ -21,7 +21,7 @@ class EventListManager(object):
         the most recent occurrence after the date ``after`` from any of the
         events in ``self.events``
         """
-        from schedule.models import Occurrence
+        from ellaschedule.models import Occurrence
         if after is None:
             after = datetime.datetime.now()
         occ_replacer = OccurrenceReplacer(

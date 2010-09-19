@@ -9,9 +9,9 @@ from django.template.defaultfilters import date
 from django.utils.translation import ugettext, ugettext_lazy as _
 import datetime
 from dateutil import rrule
-from schedule.models.rules import Rule
-from schedule.models.calendars import Calendar
-from schedule.utils import OccurrenceReplacer
+from ellaschedule.models.rules import Rule
+from ellaschedule.models.calendars import Calendar
+from ellaschedule.utils import OccurrenceReplacer
 
 class EventManager(models.Manager):
 

@@ -3,9 +3,9 @@ from django.db.models.query import QuerySet
 from django.template.defaultfilters import date
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.utils.dates import WEEKDAYS, WEEKDAYS_ABBR
-from schedule.conf.settings import FIRST_DAY_OF_WEEK, SHOW_CANCELLED_OCCURRENCES
-from schedule.models import Occurrence
-from schedule.utils import OccurrenceReplacer
+from ellaschedule.conf.settings import FIRST_DAY_OF_WEEK, SHOW_CANCELLED_OCCURRENCES
+from ellaschedule.models import Occurrence
+from ellaschedule.utils import OccurrenceReplacer
 
 weekday_names = []
 weekday_abbrs = []

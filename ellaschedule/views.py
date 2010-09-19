@@ -9,11 +9,11 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.create_update import delete_object
 import datetime
 
-from schedule.conf.settings import GET_EVENTS_FUNC, OCCURRENCE_CANCEL_REDIRECT
-from schedule.forms import EventForm, OccurrenceForm
-from schedule.models import *
-from schedule.periods import weekday_names
-from schedule.utils import check_event_permissions, coerce_date_dict
+from ellaschedule.conf.settings import GET_EVENTS_FUNC, OCCURRENCE_CANCEL_REDIRECT
+from ellaschedule.forms import EventForm, OccurrenceForm
+from ellaschedule.models import *
+from ellaschedule.periods import weekday_names
+from ellaschedule.utils import check_event_permissions, coerce_date_dict
 
 def calendar(request, calendar_slug, template='schedule/calendar.html'):
     """

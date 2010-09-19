@@ -1,5 +1,5 @@
-from schedule.models.calendars import *
-from schedule.models.events import *
-from schedule.models.rules import *
+from ellaschedule.models.calendars import *
+from ellaschedule.models.events import *
+from ellaschedule.models.rules import *
 
-from schedule.signals import *
+from ellaschedule.signals import *
