@@ -143,7 +143,7 @@ class Calendar(Publishable):
     class Meta:
         verbose_name = _('calendar')
         verbose_name_plural = _('calendar')
-        app_label = 'schedule'
+        app_label = 'ellaschedule'
 
     def __unicode__(self):
         return self.name
@@ -237,7 +237,7 @@ class CalendarRelation(models.Model):
     class Meta:
         verbose_name = _('calendar relation')
         verbose_name_plural = _('calendar relations')
-        app_label = 'schedule'
+        app_label = 'ellaschedule'
 
     def __unicode__(self):
         return u'%s - %s' %(self.calendar, self.content_object)

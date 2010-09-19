@@ -46,7 +46,7 @@ class Rule(models.Model):
     class Meta:
         verbose_name = _('rule')
         verbose_name_plural = _('rules')
-        app_label = 'schedule'
+        app_label = 'ellaschedule'
 
     def get_params(self):
         """
