@@ -3,7 +3,7 @@
 from setuptools import setup, find_packages
  
 setup(
-    name='django-ella-schedule',
+    name='ellaschedule',
     version='0.1',
     description='A calendaring app for Ella CMS, based on django-schedule.',
     author='Almad',
