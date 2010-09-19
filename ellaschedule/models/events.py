@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import datetime
+
 from django.contrib.contenttypes import generic
 from django.db import models
 from django.db.models import Q
@@ -7,8 +9,11 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import date
 from django.utils.translation import ugettext, ugettext_lazy as _
-import datetime
+
 from dateutil import rrule
+
+from ella.core.models import Publishable
+
 from ellaschedule.models.rules import Rule
 from ellaschedule.models.calendars import Calendar
 from ellaschedule.utils import OccurrenceReplacer
@@ -18,15 +23,13 @@ class EventManager(models.Manager):
     def get_for_object(self, content_object, distinction=None, inherit=True):
         return EventRelation.objects.get_events_for_object(content_object, distinction, inherit)
 
-class Event(models.Model):
+class Event(Publishable):
     '''
     This model stores meta data for a date.  You can relate this data to many
     other models.
     '''
     start = models.DateTimeField(_("start"))
     end = models.DateTimeField(_("end"),help_text=_("The end time must be later than the start time."))
-    title = models.CharField(_("title"), max_length = 255)
-    description = models.TextField(_("description"), null = True, blank = True)
     creator = models.ForeignKey(User, null = True, verbose_name=_("creator"))
     created_on = models.DateTimeField(_("created on"), default = datetime.datetime.now)
     rule = models.ForeignKey(Rule, null = True, blank = True, verbose_name=_("rule"), help_text=_("Select '----' for a one time only event."))
@@ -343,10 +346,8 @@ class EventRelation(models.Model):
 
 
 
-class Occurrence(models.Model):
+class Occurrence(Publishable):
     event = models.ForeignKey(Event, verbose_name=_("event"))
-    title = models.CharField(_("title"), max_length=255, blank=True, null=True)
-    description = models.TextField(_("description"), blank=True, null=True)
     start = models.DateTimeField(_("start"))
     end = models.DateTimeField(_("end"))
     cancelled = models.BooleanField(_("cancelled"), default=False)

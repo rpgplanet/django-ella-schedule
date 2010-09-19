@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import datetime
+
 from django.contrib.contenttypes import generic
 from django.db import models
 from django.db.models import Q
@@ -7,8 +9,11 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.template.defaultfilters import slugify
-import datetime
+
 from dateutil import rrule
+
+from ella.core.models import Publishable
+
 from ellaschedule.utils import EventListManager
 
 class CalendarManager(models.Manager):
@@ -97,7 +102,7 @@ class CalendarManager(models.Manager):
             dist_q = Q()
         return self.filter(dist_q, Q(calendarrelation__object_id=obj.id, calendarrelation__content_type=ct))
 
-class Calendar(models.Model):
+class Calendar(Publishable):
     '''
     This is for grouping events so that batch relations can be made to all
     events.  An example would be a project calendar.
@@ -133,7 +138,6 @@ class Calendar(models.Model):
     '''
 
     name = models.CharField(_("name"), max_length = 200)
-    slug = models.SlugField(_("slug"),max_length = 200)
     objects = CalendarManager()
 
     class Meta:
