@@ -36,6 +36,7 @@ class Event(Publishable):
     end_recurring_period = models.DateTimeField(_("end recurring period"), null = True, blank = True, help_text=_("This date is ignored for one time only events."))
     calendar = models.ForeignKey(Calendar, blank=True)
     parent_event = models.ForeignKey('self', null=True, blank=True)
+    place = models.CharField(_("place"), max_length=255, null=True, blank=True, help_text=_("Where is this event occurring"))
     objects = EventManager()
 
     class Meta:
