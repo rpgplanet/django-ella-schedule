@@ -197,6 +197,58 @@ class Event(Publishable):
             parent_event = self
         )
 
+    def get_structured_agenda(self):
+        """
+        Return agenda in structured form, suitable for template printing:
+        [
+            {
+            'date' : day_date,
+            'places' : ['room A', 'room B'],
+            'agenda' : {
+                time : [event, event]
+            }
+        ]
+        """
+        events = self.get_agenda()
+
+        days = set([event.start.date() for event in events])
+
+        agenda = []
+
+        #TODO: ugly spaghetti with ugly O(). Refactor, we have better sorts.
+        for day in days:
+            day_agenda = {
+                'date' : day
+            }
+            times = {}
+            start_times = set()
+            places = set()
+            for event in events:
+                if event.start.date() == day:
+                    places.add(event.place)
+                    if not event.start in times:
+                        times[event.start.time()] = []
+                    times[event.start.time()].append(event)
+                    start_times.add(event.start.time())
+
+            places = list(places)
+            start_times = list(start_times)
+            start_times.sort()
+
+            day_agenda['places'] = places
+            day_agenda['agenda'] = {}
+
+            for time in start_times:
+                day_agenda['agenda'][time] = []
+                for place in places:
+                    add = None
+                    for event in events:
+                        if event.start.date() == day and event.start.time() == time and event.place == place:
+                            add = event
+                    day_agenda['agenda'][time].append(add)
+            agenda.append(day_agenda)
+        return agenda
+
 class EventRelationManager(models.Manager):
     '''
     >>> EventRelation.objects.all().delete()
