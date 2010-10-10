@@ -35,6 +35,7 @@ class Event(Publishable):
     rule = models.ForeignKey(Rule, null = True, blank = True, verbose_name=_("rule"), help_text=_("Select '----' for a one time only event."))
     end_recurring_period = models.DateTimeField(_("end recurring period"), null = True, blank = True, help_text=_("This date is ignored for one time only events."))
     calendar = models.ForeignKey(Calendar, blank=True)
+    parent_event = models.ForeignKey('self', null=True, blank=True)
     objects = EventManager()
 
     class Meta:
@@ -178,6 +179,22 @@ class Event(Publishable):
             next = generator.next()
             yield occ_replacer.get_occurrence(next)
 
+    def get_user_authors(self):
+        return [
+            author.user for author in self.authors.all() if author.user
+        ]
+
+    user_authors = property(fget = get_user_authors)
+
+    def get_agenda(self):
+        """
+        Return agenda for given event.
+        Agenda = events that are inside given event (resp. it's occurence) and has
+        given event as parent.
+        """
+        return Event.objects.filter(
+            parent_event = self
+        )
 
 class EventRelationManager(models.Manager):
     '''
