@@ -28,8 +28,8 @@ class Event(Publishable):
     This model stores meta data for a date.  You can relate this data to many
     other models.
     '''
-    start = models.DateTimeField(_("start"))
-    end = models.DateTimeField(_("end"),help_text=_("The end time must be later than the start time."))
+    start = models.DateTimeField(_("start"), null=True, blank=True)
+    end = models.DateTimeField(_("end"), null=True, blank=True, help_text=_("The end time must be later than the start time."))
     creator = models.ForeignKey(User, null = True, verbose_name=_("creator"))
     created_on = models.DateTimeField(_("created on"), default = datetime.datetime.now)
     rule = models.ForeignKey(Rule, null = True, blank = True, verbose_name=_("rule"), help_text=_("Select '----' for a one time only event."))
